@@ -1,0 +1,6 @@
+---
+- name: Instal packages
+  apt: pkg={{item}} state=present install_recommends=false
+  with_items:
+    - openssl
+

@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Sergio R. M.
+  description: Simple role to create ssh key pairs with rsa and ed25519
+  license: license (BSD)
+  min_ansible_version: 1.2
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+  categories:
+  - system
+  - openssl
+dependencies: []

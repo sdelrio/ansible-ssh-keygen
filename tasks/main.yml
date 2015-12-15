@@ -1,0 +1,24 @@
+---
+- include: debian.yml
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version|int >= 8
+
+#- include: centos.yml
+#  when: ansible_disribution == 'Centos' and ansible_distribution_major_version|int >= 7
+
+- name: Check .ssh dir
+  file: path=/home/{{ ssh_keygen_user }}/.ssh state=directory mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
+
+- name: Create keys
+  command: ssh-keygen -t {{ item }} -b {{ ssh_keygen_bits }} -C "{{ ssh_keygen_email }}" -N "{{ ssh_keygen_password }}" -f /home/{{ ansible_ssh_user }}/.ssh/id_{{ item }} creates=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }} 
+  with_items: 
+   - "{{ ssh_keygen_types }}"
+
+- name: check private keys cert privileges
+  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }} state=directory mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
+  with_items:
+   - "{{ ssh_keygen_types }}"
+
+- name: check public keys cert privileges
+  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }}.pub state=directory mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
+  with_items:
+   - "{{ ssh_keygen_types }}"

@@ -1,0 +1,9 @@
+---
+ssh_keygen_bits: 4096
+ssh_keygen_email: "{{ ansible_ssh_user }}@users.noreply.github.com"
+ssh_keygen_password: ""
+ssh_keygen_user: "{{ ansible_ssh_user }}"
+ssh_keygen_rsa: yes
+ssh_keygen_types: 
+  - rsa
+  - ed25519
