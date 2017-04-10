@@ -14,11 +14,11 @@
    - "{{ ssh_keygen_types }}"
 
 - name: check private keys cert privileges
-  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }} state=directory mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
+  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }} state=file mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
   with_items:
    - "{{ ssh_keygen_types }}"
 
 - name: check public keys cert privileges
-  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }}.pub state=directory mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
+  file: path=/home/{{ ssh_keygen_user }}/.ssh/id_{{ item }}.pub state=file mode=0700 owner={{ ssh_keygen_user }} group={{ ssh_keygen_user }}
   with_items:
    - "{{ ssh_keygen_types }}"
